@@ -1,4 +1,3 @@
-from turtle import title
 from controllers.controllerConquista import ControllerConquista
 from controllers.constantes.constantes import BatalhaPokemom
 from time import sleep
