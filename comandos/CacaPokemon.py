@@ -22,10 +22,13 @@ class CacaPokemon(commands.Cog):
             title=pokemon_aleatorio[0],
             color=0xFF0000)
 
-        embed.set_author(name = "VOCÊ ENCONTROU UM: ")
-        embed.set_image(url=image_pokemon.arte_oficial)    
+        embed.set_author(name = "Você encontrou um: ")
+        
+        embed.set_thumbnail(
+                url=image_pokemon.arte_oficial)    
 
-        embed.set_footer(text="1-Capturar                                                                        2-Sair")
+        embed.add_field(name="**1-Capturar**", value="**2-Deixar fugir**")
+        
         
 
         await ctx.send(embed=embed) 
