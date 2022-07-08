@@ -27,7 +27,7 @@ class CacaPokemon(commands.Cog):
         embed.set_thumbnail(
                 url=image_pokemon.arte_oficial)    
 
-        embed.add_field(name="**1-Capturar**", value="**2-Deixar fugir**")
+        embed.add_field(name="**1-Capturar**", value="**2-Fugir**")
         
         
 
