@@ -5,7 +5,6 @@ from controllers.constantes import constantes
 
 cogs = [BatalhaPokemon, Conquistas, Pokedex, CacaPokemon]
 
-
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix='!')
