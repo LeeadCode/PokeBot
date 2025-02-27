@@ -8,7 +8,7 @@ def create_pokedex_embed(pokemon):
         title=f"{pokemon['name']['english']} - {pokemon['species']}",
     )
     
-    # Author (autor da embed)
+    # Author
     embed.set_author(
         name="Pokedex",
         icon_url=pokemon['sprites']['frontDefault']

@@ -27,12 +27,12 @@ class Trivia(emitter):
         super().__init__()
 
     async def start(self, interaction: discord.Interaction):
-        """Inicia a Trivia."""
+        """Inicia a Trivia"""
         await self.emit(TriviaEvent.START)
         await self.run(interaction)
 
     async def run(self, interaction: discord.Interaction):
-        """Executa uma rodada da Trivia."""
+        """Executa uma rodada da Trivia"""
         await self.emit(TriviaEvent.RUN)
 
         # Enviar pergunta

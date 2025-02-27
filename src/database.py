@@ -14,14 +14,14 @@ class Database:
         self.pokemon_data = []
         self.move_data = []
 
-        # Carregar Pokémon e Moves dos arquivos JSON
+        # Carregar Pokemons e Moves do json
         with open(os.path.join(os.path.dirname(__file__), '..', 'data', 'pokemons.json'), 'r', encoding='utf-8') as f:
             self.pokemon_data = json.load(f)
 
         with open(os.path.join(os.path.dirname(__file__), '..', 'data', 'moves.json'), 'r', encoding='utf-8') as f:
             self.move_data = json.load(f)
 
-        # Configurar sprites para cada Pokémon
+        # Configurar sprites para cada Pokemon
         for p in self.pokemon_data:
             p['sprites'] = self.get_sprites(p['id'])
 

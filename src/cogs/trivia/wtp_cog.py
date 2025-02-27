@@ -16,16 +16,16 @@ class WTP(commands.Cog):
         random_pokemon = None
         silhouette_file = None
 
-        # Setup Run Event
+        # Setup Run
         async def on_run():
             # Escolher Pokémon aleatório
             nonlocal random_pokemon
             random_pokemon = self.bot.database.get_random()
             print(random_pokemon["name"]["english"])
 
-        # Setup Reply Event
+        # Setup Reply
         async def on_reply():
-            # Criar silhouette do Pokémon
+            # Criar imagem escurecida do Pokemon
             nonlocal silhouette_file 
             silhouette_file = await create_black_silhouette_from_url(
             random_pokemon["sprites"]["other"]["oficialArtWork"]["default"]
@@ -39,17 +39,17 @@ class WTP(commands.Cog):
             else:
                 await interaction.followup.send(embed=embed, file=file)
 
-        # Setup Correct Answer Event
+        # Setup Correct Answer
         async def on_correct_answer(response: discord.Message):
             embed = wtp_successful_embed(response.author, random_pokemon)
             await interaction.followup.send(embed=embed)
 
-        # Setup End Event
+        # Setup End
         async def on_end():
             embed = wtp_result_embed(trivia.players, trivia.section_number)
             await interaction.followup.send(embed=embed)
 
-        # Criar instância do Trivia
+        # Criar instancia de Trivia
         def check_answer(message: discord.Message):
             return message.content.lower() == random_pokemon["name"]["english"].lower()
 

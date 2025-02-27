@@ -2,12 +2,12 @@ import os
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-from database import Database  # Importa o Database
+from database import Database
 import asyncio
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Carrega variáveis do .env
+# Carrega vars do .env
 load_dotenv()
 
 class MyBot(commands.Bot):
@@ -26,14 +26,14 @@ class MyBot(commands.Bot):
         # Caminho base para os cogs
         cogs_path = "./src/cogs"
 
-        # Percorrer recursivamente as subpastas dentro de "src/cogs"
+        # Percorrer subpastas
         for root, dirs, files in os.walk(cogs_path):
             for file in files:
-                # Verificar se o arquivo termina com "_cog.py" e não é um arquivo __init__.py
+                # Verificar se o arquivo termina com _cog.py e não é um arquivo __init__.py
                 if file.endswith("_cog.py") and file != "__init__.py":
                     # Gerar o caminho relativo do cog
                     cog_path = os.path.relpath(os.path.join(root, file), start=cogs_path)
-                    # Remover o sufixo "_cog.py" e substituir os separadores de pasta por "."
+                    # Remover o _cog.py e substituir os separadores de pasta por "."
                     cog_name = cog_path.replace(os.sep, ".")[:-3]
 
                     try:
@@ -50,13 +50,12 @@ class MyBot(commands.Bot):
 bot = MyBot()
 
 async def main():
-    async with bot:
-        #await bot.setup_hook()
-        await bot.start(os.getenv("DISCORD_TOKEN"))
+    #await bot.setup_hook()
+    await bot.start(os.getenv("DISCORD_TOKEN"))
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
-    except RuntimeError:  # Se o loop já estiver rodando
+    except RuntimeError:  # Se o loop ja estiver rodando
         loop = asyncio.get_event_loop()
         loop.create_task(main())

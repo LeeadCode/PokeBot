@@ -20,18 +20,18 @@ class Pokedex(commands.Cog):
 
     @pokedex.autocomplete("pokemon_name")
     async def pokedex_autocomplete(self, interaction: discord.Interaction, current: str):
-        # Obter o valor do campo focado (semelhante ao 'focusedValue' em JS)
+        # Obter o valor do campo focado
         focused_value = current
 
-        # Filtrar dados de Pokémon
+        # Filtrar dados de Pokemon
         pokemon_list = self.bot.database.get_all()
 
         filtered = [p for p in pokemon_list if p['name']['english'].lower().startswith(focused_value.lower())]
 
-        # Limitar a 25 sugestões, semelhante ao slice(0, 25) no JS
+        # Limitar a 25 sugestoes
         limited_filtered = filtered[:25]
 
-        # Responder com as sugestões de autocompletar
+        # Responder com as sugestoes
         await interaction.response.autocomplete(
             choices=[app_commands.Choice(name=p['name']['english'], value=p['id']) for p in limited_filtered]
         )
