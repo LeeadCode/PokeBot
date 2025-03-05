@@ -3,13 +3,14 @@ import cv2
 import numpy as np
 from io import BytesIO
 
+
 async def create_black_silhouette_from_url(image_url: str) -> BytesIO:
     try:
         # Baixar a imagem da URL usando aiohttp
         async with aiohttp.ClientSession() as session:
             async with session.get(image_url) as response:
                 if response.status != 200:
-                    raise ValueError(f"Falha ao baixar imagem: {response.status}")
+                    raise ValueError(f'Falha ao baixar imagem: {response.status}')
                 buffer = BytesIO(await response.read())
 
         # Ler a imagem usando OpenCV
@@ -17,7 +18,7 @@ async def create_black_silhouette_from_url(image_url: str) -> BytesIO:
         image = cv2.imdecode(image_array, cv2.IMREAD_UNCHANGED)
 
         if image is None:
-            raise ValueError("Falha ao decodificar a imagem")
+            raise ValueError('Falha ao decodificar a imagem')
 
         # Converter imagem RGBA para BGR (OpenCV usa BGR por padrão)
         if image.shape[2] == 4:  # Se a imagem for RGBA
@@ -32,5 +33,5 @@ async def create_black_silhouette_from_url(image_url: str) -> BytesIO:
         return BytesIO(output_buffer.tobytes())
 
     except Exception as e:
-        print(f"Erro ao criar a silhueta: {e}")
+        print(f'Erro ao criar a silhueta: {e}')
         raise

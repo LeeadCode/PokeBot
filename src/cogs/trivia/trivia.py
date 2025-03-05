@@ -5,17 +5,20 @@ from enum import Enum
 from typing import List, Optional
 from emmiter import emitter
 
+
 class TriviaEvent(Enum):
-    RUN = "RUN"
-    START = "START"
-    REPLY = "REPLY"
-    END = "END"
-    CORRECT_ANSWER = "CORRECT_ANSWER"
+    RUN = 'RUN'
+    START = 'START'
+    REPLY = 'REPLY'
+    END = 'END'
+    CORRECT_ANSWER = 'CORRECT_ANSWER'
+
 
 class TriviaPlayer:
-    def __init__(self, user: discord.Usern, wins: int):
+    def __init__(self, user: discord.user, wins: int):
         self.user = user
-        self.wins = 0
+        self.wins = wins
+
 
 class Trivia(emitter):
     def __init__(self, bot: commands.Bot, collector_filter):
@@ -28,8 +31,11 @@ class Trivia(emitter):
 
     async def start(self, interaction: discord.Interaction):
         """Inicia a Trivia"""
-        await self.emit(TriviaEvent.START)
-        await self.run(interaction)
+        try:
+            await self.emit(TriviaEvent.START)
+            await self.run(interaction)
+        except Exception as e:
+            print(e)
 
     async def run(self, interaction: discord.Interaction):
         """Executa uma rodada da Trivia"""
@@ -39,11 +45,7 @@ class Trivia(emitter):
         await self.emit(TriviaEvent.REPLY)
 
         try:
-            response = await self.bot.wait_for(
-                "message",
-                timeout=15,
-                check=self.collector_filter
-            )
+            response = await self.bot.wait_for('message', timeout=15, check=self.collector_filter)
         except asyncio.TimeoutError:
             response = None
 

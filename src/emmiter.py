@@ -1,12 +1,12 @@
-class emitter():
+class emitter:
     def __init__(self):
-      self.event_handlers = {}
+        self.event_handlers = {}
 
     def on(self, event: str, handler):
-      """Registra eventos"""
-      if event not in self.event_handlers:
-          self.event_handlers[event] = []
-      self.event_handlers[event].append(handler)
+        """Registra eventos"""
+        if event not in self.event_handlers:
+            self.event_handlers[event] = []
+        self.event_handlers[event].append(handler)
 
     async def emit(self, event: str, *args):
         """Dispara eventos"""

@@ -6,7 +6,7 @@ def status_bar(current, max_value=255, size=20):
     filled_length = round(size * percentage)
 
     # Construa a barra com caracteres "█"
-    bar = "█" * filled_length
-    
+    bar = '█' * filled_length
+
     # Retorna a barra formatada
-    return f"```Fix\n{bar}```"
+    return f'```Fix\n{bar}```'
