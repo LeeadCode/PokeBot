@@ -46,7 +46,6 @@ format = 'ruff format'
 run = 'python src/main.py'
 pre_test = 'task lint'
 test = 'pytest -s -x -vv'
-post_test = 'coverage html'
 
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]
